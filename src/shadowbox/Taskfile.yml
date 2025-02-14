@@ -55,7 +55,7 @@ tasks:
     env:
       # WARNING: The SB_API_PREFIX should be kept secret!
       SB_API_PREFIX: TestApiPrefix
-      SB_METRICS_URL: https://dev.metrics.getoutline.org
+      SB_METRICS_URL: http://127.0.0.1:8080/
       SB_STATE_DIR: '{{.STATE_DIR}}'
       SB_PUBLIC_IP: localhost
       SB_CERTIFICATE_FILE: '{{joinPath .RUN_DIR "/shadowbox-selfsigned-dev.crt"}}'
