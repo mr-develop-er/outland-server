@@ -302,7 +302,7 @@ export class ShadowsocksManagerService {
     res.send(HttpSuccess.OK, {
       name: this.serverConfig.data().name || this.defaultServerName,
       serverId: this.serverConfig.data().serverId,
-      metricsEnabled: this.serverConfig.data().metricsEnabled || false,
+      metricsEnabled: this.serverConfig.data().metricsEnabled || true,
       createdTimestampMs: this.serverConfig.data().createdTimestampMs,
       version: version.getPackageVersion(),
       accessKeyDataLimit: this.serverConfig.data().accessKeyDataLimit,
