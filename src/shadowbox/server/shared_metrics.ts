@@ -227,7 +227,7 @@ export class OutlineSharedMetricsPublisher implements SharedMetricsPublisher {
   }
 
   isSharingEnabled(): boolean {
-    return this.serverConfig.data().metricsEnabled || false;
+    return this.serverConfig.data().metricsEnabled || true;
   }
 
   private async reportServerUsageMetrics(locationUsageMetrics: ReportedUsage[]): Promise<void> {
