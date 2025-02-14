@@ -59,7 +59,7 @@ export function readServerConfig(filename: string): json_config.JsonConfig<Serve
   try {
     const config = json_config.loadFileConfig<ServerConfigJson>(filename);
     config.data().serverId = config.data().serverId || uuidv4();
-    config.data().metricsEnabled = config.data().metricsEnabled || false;
+    config.data().metricsEnabled = config.data().metricsEnabled || true;
     config.data().createdTimestampMs = config.data().createdTimestampMs || Date.now();
     config.data().hostname = config.data().hostname || process.env.SB_PUBLIC_IP;
     config.write();
