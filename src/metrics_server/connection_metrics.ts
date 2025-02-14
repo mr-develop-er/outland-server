@@ -19,6 +19,16 @@ import {
   HourlyUserConnectionMetricsReport,
   HourlyUserConnectionMetricsReportByLocation,
 } from './model';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const DATA_FOLDER = path.join(__dirname, 'data');
+const FILE_PATH = path.join(DATA_FOLDER, 'feature_metrics.json');
+
+if (!fs.existsSync(DATA_FOLDER)) {
+  fs.mkdirSync(DATA_FOLDER, { recursive: true });
+}
+
 
 const TERABYTE = Math.pow(2, 40);
 
@@ -36,7 +46,11 @@ export class BigQueryConnectionsTable implements InsertableTable<ConnectionRow> 
   constructor(private bigqueryTable: Table) {}
 
   async insert(rows: ConnectionRow[]): Promise<void> {
-    await this.bigqueryTable.insert(rows);
+    const data = fs.existsSync(FILE_PATH) ? JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) : [];
+    const newRows = Array.isArray(rows) ? rows : [rows];
+    data.push(...newRows);
+    fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), 'utf-8');
+    //await this.bigqueryTable.insert(rows);
   }
 }
 

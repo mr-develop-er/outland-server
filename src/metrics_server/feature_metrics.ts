@@ -12,10 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Table} from '@google-cloud/bigquery';
+import { Table } from '@google-cloud/bigquery';
 
-import {InsertableTable} from './infrastructure/table';
-import {DailyDataLimitMetricsReport, DailyFeatureMetricsReport} from './model';
+import { InsertableTable } from './infrastructure/table';
+import { DailyDataLimitMetricsReport, DailyFeatureMetricsReport } from './model';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const DATA_FOLDER = path.join(__dirname, 'data');
+const FILE_PATH = path.join(DATA_FOLDER, 'feature_metrics.json');
+
+if (!fs.existsSync(DATA_FOLDER)) {
+  fs.mkdirSync(DATA_FOLDER, { recursive: true });
+}
 
 // Reflects the feature metrics BigQuery table schema.
 export interface FeatureRow {
@@ -26,10 +35,14 @@ export interface FeatureRow {
 }
 
 export class BigQueryFeaturesTable implements InsertableTable<FeatureRow> {
-  constructor(private bigqueryTable: Table) {}
+  constructor(private bigqueryTable: Table) { }
 
   async insert(rows: FeatureRow | FeatureRow[]): Promise<void> {
-    await this.bigqueryTable.insert(rows);
+    const data = fs.existsSync(FILE_PATH) ? JSON.parse(fs.readFileSync(FILE_PATH, 'utf-8')) : [];
+    const newRows = Array.isArray(rows) ? rows : [rows];
+    data.push(...newRows);
+    fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2), 'utf-8');
+    //await this.bigqueryTable.insert(rows);
   }
 }
 
