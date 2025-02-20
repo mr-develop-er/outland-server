@@ -73,7 +73,7 @@ interface ServerMetrics {
 }
 
 export interface ManagerMetrics {
-  getOutboundByteTransfer(timeframe: DataUsageTimeframe): Promise<DataUsageByUser>;
+  getOutboundByteTransfer(): Promise<DataUsageByUser>;
   getServerMetrics(timeframe: Duration): Promise<ServerMetrics>;
 }
 
@@ -81,12 +81,12 @@ export interface ManagerMetrics {
 export class PrometheusManagerMetrics implements ManagerMetrics {
   constructor(private prometheusClient: PrometheusClient) {}
 
-  async getOutboundByteTransfer(timeframe: DataUsageTimeframe): Promise<DataUsageByUser> {
+  async getOutboundByteTransfer(): Promise<DataUsageByUser> {
     // TODO(fortuna): Consider pre-computing this to save server's CPU.
     // We measure only traffic leaving the server, since that's what DigitalOcean charges.
     // TODO: Display all directions to admin
     const result = await this.prometheusClient.query(
-      `sum(increase(shadowsocks_data_bytes{dir=~"c<p|p>t"}[${timeframe.hours}h])) by (access_key)`
+      `sum(shadowsocks_data_bytes{dir=~"c<p|p>t"}) by (access_key)`
     );
     const usage = {} as {[userId: string]: number};
     for (const entry of result.result) {
@@ -96,6 +96,7 @@ export class PrometheusManagerMetrics implements ManagerMetrics {
       }
       usage[entry.metric['access_key'] || ''] = bytes;
     }
+    
     return {bytesTransferredByUserId: usage};
   }
 

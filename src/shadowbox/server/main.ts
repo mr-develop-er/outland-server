@@ -181,7 +181,7 @@ async function main() {
     prometheusConfigFilename,
     '--web.enable-admin-api',
     '--storage.tsdb.retention.time',
-    '31d',
+    '365d',
     '--storage.tsdb.path',
     prometheusTsdbFilename,
     '--web.listen-address',

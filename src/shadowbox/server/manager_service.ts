@@ -617,7 +617,7 @@ export class ShadowsocksManagerService {
   async getDataUsage(req: RequestType, res: ResponseType, next: restify.Next) {
     try {
       logging.debug(`getDataUsage request ${JSON.stringify(req.params)}`);
-      const response = await this.managerMetrics.getOutboundByteTransfer({hours: 30 * 24});
+      const response = await this.managerMetrics.getOutboundByteTransfer();
       res.send(HttpSuccess.OK, response);
       logging.debug(`getDataUsage response ${JSON.stringify(response)}`);
       return next();

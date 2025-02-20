@@ -73,7 +73,7 @@ tasks:
     desc: Build the Outline Server Docker image
     vars:
       VERSION: '{{.IMAGE_VERSION | default "dev"}}'
-      IMAGE_NAME: '{{.IMAGE_NAME | default "localhost/outline/shadowbox"}}'
+      IMAGE_NAME: '{{.IMAGE_NAME | default "invisible/shadowbox"}}'
       TARGET_ARCH: '{{.TARGET_ARCH | default "x86_64"}}'
       IMAGE_ROOT: '{{joinPath .OUTPUT_BASE "image_root" .TARGET_ARCH}}'
       # Newer node images have no valid content trust data.
@@ -117,7 +117,7 @@ tasks:
     deps: [{task: docker:build, vars: {TARGET_ARCH: {sh: 'uname -m'}}}]
     vars:
       RUN_DIR: '{{joinPath .OUTPUT_BASE "docker_start"}}'
-      IMAGE_NAME: '{{.IMAGE_NAME | default "localhost/outline/shadowbox"}}'
+      IMAGE_NAME: '{{.IMAGE_NAME | default "invisible/shadowbox"}}'
       API_PORT: '8081'
       ACCESS_KEY_PORT: '9999'
       CERTIFICATE_FILE: 'shadowbox-selfsigned-dev.crt'
@@ -170,7 +170,7 @@ tasks:
         vars: {TARGET_ARCH: {sh: 'uname -m'}}
       - task: test_image
         vars:
-          IMAGE_NAME: localhost/outline/shadowbox:latest
+          IMAGE_NAME: invisible/shadowbox:latest
           OUTPUT_DIR: '{{joinPath .OUTPUT_BASE "integration_test"}}'
 
   test_image:
