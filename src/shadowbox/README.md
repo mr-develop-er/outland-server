@@ -9,7 +9,7 @@ The Outline Server, internal name "Shadowbox," is designed to streamline the set
 1. **Run the Installation Script**
 
    ```sh
-   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/server_manager/install_scripts/install_server.sh)"
+   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/src/server_manager/install_scripts/install_server.sh)"
    ```
 
 1. **Customize (Optional)**
@@ -17,7 +17,7 @@ The Outline Server, internal name "Shadowbox," is designed to streamline the set
    Add flags for hostname, port, etc. Example:
 
    ```sh
-   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/server_manager/install_scripts/install_server.sh)" install_server.sh \
+   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/src/server_manager/install_scripts/install_server.sh)" install_server.sh \
      --hostname=myserver.com \
      --keys-port=443
    ```
