@@ -9,7 +9,7 @@ The Outline Server, internal name "Shadowbox," is designed to streamline the set
 1. **Run the Installation Script**
 
    ```sh
-   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-apps/master/server_manager/install_scripts/install_server.sh)"
+   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/server_manager/install_scripts/install_server.sh)"
    ```
 
 1. **Customize (Optional)**
@@ -17,7 +17,7 @@ The Outline Server, internal name "Shadowbox," is designed to streamline the set
    Add flags for hostname, port, etc. Example:
 
    ```sh
-   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-apps/master/server_manager/install_scripts/install_server.sh)" install_server.sh \
+   sudo bash -c "$(wget -qO- https://raw.githubusercontent.com/mr-develop-er/outland-server/master/server_manager/install_scripts/install_server.sh)" install_server.sh \
      --hostname=myserver.com \
      --keys-port=443
    ```
@@ -58,7 +58,7 @@ The Outline Server, internal name "Shadowbox," is designed to streamline the set
      > - **Debug Image:**
      >
      >   ```sh
-     >   docker run --rm -it --entrypoint=sh localhost/outline/shadowbox
+     >   docker run --rm -it --entrypoint=sh invisible/shadowbox
      >   ```
      >
      > - **Debug Running Container:**
@@ -113,7 +113,7 @@ The Outline Server provides a REST API for access key management. If you know th
 
 1. **Further Options:**
 
-   Consult the [OpenAPI spec](./server/api.yml) and [documentation](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/shadowbox/server/api.yml) for more options.
+   Consult the [OpenAPI spec](./server/api.yml) and [documentation](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/mr-develop-er/outland-server/master/src/shadowbox/server/api.yml) for more options.
 
 ## Testing
 

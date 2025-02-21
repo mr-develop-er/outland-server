@@ -464,7 +464,7 @@ install_shadowbox() {
   # Make sure we don't leak readable files to other users.
   umask 0007
 
-  export CONTAINER_NAME="${CONTAINER_NAME:-shadowbox}"
+  export CONTAINER_NAME="${CONTAINER_NAME:-invisiblebox}"
 
   run_step "Verifying that Docker is installed" verify_docker_installed
   run_step "Verifying that Docker daemon is running" verify_docker_running
@@ -481,7 +481,7 @@ install_shadowbox() {
   fi
   readonly API_PORT
   readonly ACCESS_CONFIG="${ACCESS_CONFIG:-${SHADOWBOX_DIR}/access.txt}"
-  readonly SB_IMAGE="${SB_IMAGE:-quay.io/outline/shadowbox:stable}"
+  readonly SB_IMAGE="${SB_IMAGE:-invisible/shadowbox:latest}"
 
   PUBLIC_HOSTNAME="${FLAGS_HOSTNAME:-${SB_PUBLIC_IP:-}}"
   if [[ -z "${PUBLIC_HOSTNAME}" ]]; then
